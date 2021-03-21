@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
+import joblib
 
 
 def clean_data(data):
@@ -55,6 +56,8 @@ def main():
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
+    
+    joblib.dump(model, "./outputs/bank-marketing-log-reg.joblib")
 
 
 # TODO: Create TabularDataset using TabularDatasetFactory
