@@ -6,11 +6,12 @@ In this project, we build and optimize an Azure ML pipeline using the Python SDK
 This model is then compared to an Azure AutoML run.
 
 ## Summary
-**In 1-2 sentences, explain the problem statement: e.g "This dataset contains data about... we seek to predict..."**
+We utilized the UCI bank marketing data set to predict if a customer will suscribe. The data contains contacts made by a Portuguese bank to its clients. Each sample contains personal information about the client (E.g. age, job, housing), information about previous contacts with the client, and financial informaion of the client. A full description of the dataset can be found [here](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing).
 
-**In 1-2 sentences, explain the solution: e.g. "The best performing model was a ..."**
+We produced a Logistic regression model with SKlearn achieving a 91.279% accuracy. Using AutoML, we found a slightly more accurate model (MaxAbsScaler, LightGBM) with 91.3071% accuracy.
 
 ## Scikit-learn Pipeline
+
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 **What are the benefits of the parameter sampler you chose?**
@@ -26,6 +27,3 @@ This model is then compared to an Azure AutoML run.
 ## Future work
 **What are some areas of improvement for future experiments? Why might these improvements help the model?**
 
-## Proof of cluster clean up
-**If you did not delete your compute cluster in the code, please complete this section. Otherwise, delete this section.**
-**Image of cluster marked for deletion**
