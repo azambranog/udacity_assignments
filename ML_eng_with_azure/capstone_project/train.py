@@ -1,21 +1,21 @@
 import argparse
 import os
 from azureml.core.run import Run
+from azureml.core import Dataset
 import joblib
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import AdaBoostClassifier
-from sklearn.metrics import f1_score
+from sklearn.metrics import roc_auc_score
 
 run = Run.get_context()
 ws = run.experiment.workspace
 
-
 def retreive_data():
     # get the dataset
-    dataset = run.input_datasets['hr-data']
+    dataset = Dataset.get_by_name(ws, 'hr-data', version='latest')
 
     # load the Dataset to pandas DataFrame
     data = dataset.to_pandas_dataframe()
@@ -24,7 +24,7 @@ def retreive_data():
 
 def clean_data(data):
     # drop id column
-    data = data.drop('employee_id', axis=1)
+    # data = data.drop('employee_id', axis=1)
     # drop rows ith NAs
     data = data.dropna()
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     n_estimators = np.int(args.n_estimators)
-    learning_rate = np.floar(args.learning_rate)
+    learning_rate = np.float(args.learning_rate)
 
     run.log("Number of estimators:", n_estimators)
     run.log("Learning Rate:", learning_rate)
@@ -75,9 +75,9 @@ if __name__ == "__main__":
     model.fit(X_train, y_train)
 
     y_predicted = model.predict(X_test)
-    score = f1_score(y_test, y_predicted)
+    score = roc_auc_score(y_test, y_predicted, average="weighted")
 
-    run.log("f1_score_micro", np.float(score))
+    run.log("AUC_weighted", np.float(score))
 
     os.makedirs('./outputs', exist_ok=True)
     joblib.dump(model, "./outputs/hr-data-adaboost.joblib")
