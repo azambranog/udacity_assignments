@@ -1,16 +1,19 @@
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
+# Prediciton of Employee Promotions with Azure ML 
 
-# Your Project Title Here
+During this project we demonstrated the main capabilities of Azure ML to train and deploy ML models.
+For this purpose we selected a public dataset containing personal information of employees of a company and their performance.
 
-*TODO:* Write a short introduction to your project.
-
-## Project Set Up and Installation
-*OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
+We first let AutoML find a model for the task. 
+Then, we manually created  a training script for an AdaBoost model and proceeded to optimize its hypermarameters using an Hyperdrive run.
+We compared the result of both experiments and kept the best model.
+Finally we deployed the best of the models, making it available to use via a REST API.  
 
 ## Dataset
 
 ### Overview
+
 https://www.kaggle.com/shivan118/hranalysis
+The target is to to predict if an employee is likely o receive a promotion.
 *TODO*: Explain about the data you are using and where you got it from.
 
 ### Task
