@@ -11,21 +11,46 @@ Finally we deployed the best of the models, making it available to use via a RES
 ## Dataset
 
 ### Overview
+For this project we used a dataset containing information about the employees of a company.
+The data includes personal information and work performance metrics for each employee.
 
-https://www.kaggle.com/shivan118/hranalysis
-The target is to to predict if an employee is likely o receive a promotion.
-*TODO*: Explain about the data you are using and where you got it from.
+The dataset is publicly available for Kaggle users [here](https://www.kaggle.com/shivan118/hranalysis).
+Credit: Kaggle user [shivan118](https://www.kaggle.com/shivan118)
+ 
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+The target is to to predict if an employee is likely o receive a promotion given their personal data and work performance metrics.
+The dataset is imbalanced with only 5% of the employees in the dataset having obtained a promotion.
+The problem is a classical imbalanced binary classification problem.
 
 ### Access
-*TODO*: Explain how you are accessing the data in your workspace.
+To access the dataset we manually registered it with the name "hr-data" as a tabular dataset. 
+We took the chance to directly remove columns that are unnecessary for training (e.g. Id). 
+
+<img src="img/1_dataset.png" height="220">
+ 
+Once the model was registered, we are able to access it from our workspace by name
+
+<img src="img/2_dataset.png" height="220">
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+We first solved the task by using AutoML. 
+Our task is a classification task. 
+To optimize the running time we allowed AutoMl to stop early if a best score is found.
+We also allowed up to 3 parallel runs and limited the total run time to 30 minutes. 
+Finally we chose the weighted AUC as metric since it is an appropriate metric for the imbalanced task.
+
 
 ### Results
+We submitted the run and monitor it with the run details widget.
+
+<img src="img/3_automl_submission.png" height="220">
+
+The best model found by AutoML was a voting ensamble with 0.90543 weighted AUC.
+
+<img src="img/4_automl_best_model.png" height="220">
+
+
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
 
 *TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
@@ -47,6 +72,3 @@ The target is to to predict if an employee is likely o receive a promotion.
 - A working model
 - Demo of the deployed  model
 - Demo of a sample request sent to the endpoint and its response
-
-## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
