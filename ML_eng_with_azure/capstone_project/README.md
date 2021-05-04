@@ -27,11 +27,11 @@ The problem is a classical imbalanced binary classification problem.
 To access the dataset we manually registered it with the name "hr-data" as a tabular dataset. 
 We took the chance to directly remove columns that are unnecessary for training (e.g. Id). 
 
-<img src="img/1_dataset.png" height="220">
+<img src="img/1_dataset.png" height="280">
  
 Once the model was registered, we are able to access it from our workspace by name
 
-<img src="img/2_dataset.png" height="220">
+<img src="img/2_dataset.png" height="280">
 
 ## Automated ML
 We first solved the task by using AutoML. 
@@ -44,16 +44,16 @@ Finally we chose the weighted AUC as metric since it is an appropriate metric fo
 ### Results
 We submitted the run and monitor it with the run details widget.
 
-<img src="img/3_automl_submission.png" height="220">
+<img src="img/3_automl_submission.png" height="260">
 
 The best model found by AutoML was a voting ensemble with 0.90543 weighted AUC.
 
-<img src="img/4_automl_best_model.png" height="220">
+<img src="img/4_automl_best_model.png" height="310">
 
 We can check the parameters of the model in the tags. 
 The resulting ensemble contains 9 different models with their respective weights.
 
-<img src="img/5_automl_model_params.png" height="220">
+<img src="img/5_automl_model_params.png" height="360">
 
 The resulting model is already very good. 
 We could try increasing the allowed time to run auto ML, but the performance increase would be probably minimal.
@@ -70,12 +70,12 @@ The task was to optimize the weighted AUC, so we can compare to AutoML results.
 ### Results
 We submitted the experiment and monitored it with the run details widget
 
-<img src="img/5_hyper_run_details.png" height="220">
+<img src="img/5_hyper_run_details.png" height="260">
 
 Our best model had a poor performance, the weighted AUC was 0.633. 
 The corresponding parameters were 154 estimators and a learning rate of 1.82.
 
- <img src="img/6_hyper_best_run.png" height="220">
+ <img src="img/6_hyper_best_run.png" height="280">
 
 We notice that the learning rate for the optimal model is close to our maximum boundary of the sampling spave (2).
 This gives an indication that we should expand the sampling grid in the upper direction. 
@@ -96,19 +96,19 @@ AutoMl also porvides this file for every run.
 We chose ACI with 1GB memory and 1 cpu core.
 - Deploy the webservice using the configurations mentioned above.
 
- <img src="img/7_service_deployment.png" height="220">
+ <img src="img/7_service_deployment.png" height="330">
 
 After deployment, we need to wait some minutes until the service is ready for consumption.
 After that we can see the model marked as healty and get the entrypoint URI in the web console.
 
- <img src="img/7_service_deployment.png" height="220">
+ <img src="img/7_healty_service.png" height="320">
 
 We can finally make predictions on new data via post request with any client we want. 
 In this case we did not specify authentication, but in production systems it is very important to secure the entrypoint with an API key or other authenticacion mechanism.
 
 The following image gives an example of how to make predictions with the API via python
 
- <img src="img/8_service_query.png" height="220">
+ <img src="img/8_service_query.png" height="280">
 
 In this case th example employee gets a response "0" meaning they will not get a promotion.
 
